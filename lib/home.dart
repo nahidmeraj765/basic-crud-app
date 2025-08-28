@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => AddProductScreen()),);
         },
