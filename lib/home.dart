@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_crud_app/add_product_screen.dart';
+import 'package:flutter_application_crud_app/home_content.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,45 +17,18 @@ class _HomeState extends State<Home> {
       body: ListView.separated(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return ListTile(
-            leading: CircleAvatar(),
-            title: Text("Product Name"),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Product ID"),
-                Row(children: [Text("Quantity"), Text("Price")]),
-              ],
-            ),
-            trailing: PopupMenuButton<ProductOptions>(
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    value: ProductOptions.update,
-                    child: Text("Update"),
-                  ),
-                  PopupMenuItem(
-                    value: ProductOptions.delete,
-                    child: Text("Delete"),
-                  ),
-                ];
-              },
-              onSelected: (ProductOptions selectedOptions) {
-                if (selectedOptions == ProductOptions.delete) {
-                  print("delete");
-                } else if (selectedOptions == ProductOptions.update) {
-                  print("update");
-                }
-              },
-            ),
-          );
+          return HomeContent();
         },
         separatorBuilder: (context, index) {
           return Divider(indent: 70);
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddProductScreen()),);
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
-
-enum ProductOptions { update, delete }
